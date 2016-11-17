@@ -28,16 +28,13 @@ public class DbHelper extends SQLiteOpenHelper {
                 Quote.COLUMN_PERCENTAGE_CHANGE + " REAL NOT NULL, " +
                 Quote.COLUMN_HISTORY + " TEXT NOT NULL, " +
                 "UNIQUE (" + Quote.COLUMN_SYMBOL + ") ON CONFLICT REPLACE);";
-
         db.execSQL(builder);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
         db.execSQL(" DROP TABLE IF EXISTS " + Quote.TABLE_NAME);
-
         onCreate(db);
     }
 }

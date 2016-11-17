@@ -49,8 +49,5 @@ public class Contract {
         public static String getStockFromUri(Uri uri) {
             return uri.getLastPathSegment();
         }
-
-
     }
-
 }

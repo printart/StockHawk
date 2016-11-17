@@ -45,7 +45,6 @@ public final class QuoteSyncJob {
         from.add(Calendar.YEAR, -2);
 
         try {
-
             Set<String> stockPref = PrefUtils.getStocks(context);
             Set<String> stockCopy = new HashSet<>();
             stockCopy.addAll(stockPref);
@@ -67,13 +66,14 @@ public final class QuoteSyncJob {
             while (iterator.hasNext()) {
                 String symbol = iterator.next();
 
-
                 Stock stock = quotes.get(symbol);
                 StockQuote quote = stock.getQuote();
 
                 //quote.getPrice() returns null if unknown symbol
                 if (quote.getPrice() == null) {
                     PrefUtils.editStockPref(context, symbol, false);
+                    QuoteIntentService.sSymbol = symbol;
+                    QuoteIntentService.isNoSymbol = true;
                     break;
                 }
 
@@ -99,12 +99,8 @@ public final class QuoteSyncJob {
                 quoteCV.put(Contract.Quote.COLUMN_PRICE, price);
                 quoteCV.put(Contract.Quote.COLUMN_PERCENTAGE_CHANGE, percentChange);
                 quoteCV.put(Contract.Quote.COLUMN_ABSOLUTE_CHANGE, change);
-
-
                 quoteCV.put(Contract.Quote.COLUMN_HISTORY, historyBuilder.toString());
-
                 quoteCVs.add(quoteCV);
-
             }
 
             context.getContentResolver()
@@ -123,14 +119,11 @@ public final class QuoteSyncJob {
     private static void schedulePeriodic(Context context) {
         Timber.d("Scheduling a periodic task");
 
-
         JobInfo.Builder builder = new JobInfo.Builder(PERIODIC_ID, new ComponentName(context, QuoteJobService.class));
-
 
         builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
                 .setPeriodic(PERIOD)
                 .setBackoffCriteria(INITIAL_BACKOFF, JobInfo.BACKOFF_POLICY_EXPONENTIAL);
-
 
         JobScheduler scheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
 
@@ -139,36 +132,27 @@ public final class QuoteSyncJob {
 
 
     synchronized public static void initialize(final Context context) {
-
         schedulePeriodic(context);
         syncImmediately(context);
-
     }
 
     synchronized public static void syncImmediately(Context context) {
-
+        Context appContext = context.getApplicationContext();
         ConnectivityManager cm =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
-            Intent nowIntent = new Intent(context, QuoteIntentService.class);
-            context.startService(nowIntent);
+            Intent nowIntent = new Intent(appContext, QuoteIntentService.class);
+            appContext.startService(nowIntent);
         } else {
 
-            JobInfo.Builder builder = new JobInfo.Builder(ONE_OFF_ID, new ComponentName(context, QuoteJobService.class));
-
+            JobInfo.Builder builder = new JobInfo.Builder(ONE_OFF_ID, new ComponentName(appContext, QuoteJobService.class));
 
             builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
                     .setBackoffCriteria(INITIAL_BACKOFF, JobInfo.BACKOFF_POLICY_EXPONENTIAL);
 
-
-            JobScheduler scheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
-
+            JobScheduler scheduler = (JobScheduler) appContext.getSystemService(Context.JOB_SCHEDULER_SERVICE);
             scheduler.schedule(builder.build());
-
-
         }
     }
-
-
 }

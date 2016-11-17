@@ -2,8 +2,10 @@ package com.udacity.stockhawk.ui;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
+
+    private static final String TAG = "StockAdapter";
 
     final private Context context;
     final private DecimalFormat dollarFormatWithPlus;
@@ -55,9 +59,7 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
 
     @Override
     public StockViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View item = LayoutInflater.from(context).inflate(R.layout.list_item_quote, parent, false);
-
         return new StockViewHolder(item);
     }
 
@@ -66,10 +68,12 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
 
         cursor.moveToPosition(position);
 
-
         holder.symbol.setText(cursor.getString(Contract.Quote.POSITION_SYMBOL));
         holder.price.setText(dollarFormat.format(cursor.getFloat(Contract.Quote.POSITION_PRICE)));
 
+        String contentDescription = "symbol is " + holder.symbol.getText().toString()
+                + " and the price is " + holder.price.getText().toString();
+        holder.symbol.setContentDescription(contentDescription);
 
         float rawAbsoluteChange = cursor.getFloat(Contract.Quote.POSITION_ABSOLUTE_CHANGE);
         float percentageChange = cursor.getFloat(Contract.Quote.POSITION_PERCENTAGE_CHANGE);
@@ -129,10 +133,14 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
             int adapterPosition = getAdapterPosition();
             cursor.moveToPosition(adapterPosition);
             int symbolColumn = cursor.getColumnIndex(Contract.Quote.COLUMN_SYMBOL);
-            clickHandler.onClick(cursor.getString(symbolColumn));
+            String symbol = cursor.getString(symbolColumn);
+            clickHandler.onClick(symbol);
 
+            Log.i(TAG, "onClick: CLICKED>" + symbol);
+
+            Intent intent = new Intent(context, SymbolDetailActivity.class);
+            intent.putExtra("symbol", symbol);
+            context.startActivity(intent);
         }
-
-
     }
 }

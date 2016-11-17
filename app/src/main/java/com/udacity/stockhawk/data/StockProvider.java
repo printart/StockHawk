@@ -104,7 +104,6 @@ public class StockProvider extends ContentProvider {
 
         getContext().getContentResolver().notifyChange(uri, null);
 
-
         return returnUri;
     }
 
@@ -121,7 +120,6 @@ public class StockProvider extends ContentProvider {
                         selection,
                         selectionArgs
                 );
-
                 break;
 
             case QUOTE_FOR_SYMBOL:
@@ -173,7 +171,5 @@ public class StockProvider extends ContentProvider {
             default:
                 return super.bulkInsert(uri, values);
         }
-
-
     }
 }
