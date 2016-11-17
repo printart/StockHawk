@@ -44,6 +44,7 @@ public final class PrefUtils {
         if (add) {
             stocks.add(symbol);
         } else {
+            //called from QuoteSyncJob to remove unknown symbol
             stocks.remove(symbol);
         }
 
