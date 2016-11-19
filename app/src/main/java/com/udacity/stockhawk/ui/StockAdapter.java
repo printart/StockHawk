@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +22,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
-
-    private static final String TAG = "StockAdapter";
 
     final private Context context;
     final private DecimalFormat dollarFormatWithPlus;
@@ -135,9 +132,6 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
             int symbolColumn = cursor.getColumnIndex(Contract.Quote.COLUMN_SYMBOL);
             String symbol = cursor.getString(symbolColumn);
             clickHandler.onClick(symbol);
-
-            Log.i(TAG, "onClick: CLICKED>" + symbol);
-
             Intent intent = new Intent(context, SymbolDetailActivity.class);
             intent.putExtra("symbol", symbol);
             context.startActivity(intent);

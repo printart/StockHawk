@@ -1,15 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/padding_8">
+
+    <TextView
+        android:id="@+id/symbol_detail_title_text_view_v"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/symbol_title_v"
+        android:textColor="@color/colorBarChart"
+        android:textSize="@dimen/text_size_30"/>
 
     <TextView
         android:id="@+id/symbol_detail_title_text_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="30sp"
+        android:layout_toEndOf="@+id/symbol_detail_title_text_view_v"
+        android:textColor="@color/colorBarChart"
+        android:textSize="@dimen/text_size_30"
         tools:text="GOOGL"/>
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/symbol_detail_price_text_view_v"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/symbol_detail_title_text_view_v"
+        android:text="@string/current_price_title_v"
+        android:textColor="@color/colorBarChart"
+        android:textSize="@dimen/text_size_30"/>
+
+    <TextView
+        android:id="@+id/symbol_detail_price_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/symbol_detail_title_text_view"
+        android:layout_toEndOf="@+id/symbol_detail_price_text_view_v"
+        android:textColor="@color/colorBarChart"
+        android:textSize="@dimen/text_size_30"
+        tools:text="$100.00"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/symbol_detail_price_text_view_v"
+        android:layout_marginTop="@dimen/margin_top_8"
+        android:paddingBottom="@dimen/padding_bottom_8">
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/bar_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+</RelativeLayout>
