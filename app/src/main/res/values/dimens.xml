@@ -6,4 +6,15 @@
     <dimen name="text_size_30">30sp</dimen>
     <dimen name="margin_top_8">8dp</dimen>
     <dimen name="padding_bottom_8">8dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
+    <dimen name="text_size_25">25sp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
+    <dimen name="margin_top_5">5dp</dimen>
 </resources>

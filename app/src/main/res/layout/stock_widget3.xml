@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/colorWidgetGenBackground"
+              android:orientation="vertical"
+              android:padding="@dimen/padding_16">
+
+    <include layout="@layout/widget_title"/>
+
+    <include layout="@layout/first_row"/>
+
+    <include layout="@layout/second_row"/>
+
+    <include layout="@layout/third_row"/>
+</LinearLayout>

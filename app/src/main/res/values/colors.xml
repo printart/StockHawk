@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--<color name="colorPrimary">#ff9800</color>-->
-    <color name="colorPrimary">#3F51B5</color>
-    <!--<color name="colorPrimaryDark">#f57c00 </color>-->
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#AD1457</color>
+    <color name="colorPrimaryDark">#880E4F</color>
+    <color name="colorAccent">#607D8B</color>
 
     <color name="material_blue_700">#1976D2</color>
-    <color name="material_blue_500">#2196F3</color>
+    <color name="material_blue_500">#4CAF50</color>
     <color name="material_red_700">#D50000</color>
     <color name="material_green_700">#00C853</color>
 
@@ -16,4 +15,12 @@
     <color name="colorChartPriceText">#FFCCBC</color>
     <color name="colorChartTimeText">#FF6E40</color>
     <color name="colorChartHighlight">#FAFAFA</color>
+
+    <!--widget percent color-->
+    <color name="colorPercentPositive">#4CAF50</color>
+    <color name="colorPercentNegative">#F44336</color>
+    <color name="colorWidgetTitleBackground">#424242</color>
+    <color name="colorWidgetTitleText">#FF6E40</color>
+    <color name="colorWidgetGenBackground">#424242</color>
+
 </resources>

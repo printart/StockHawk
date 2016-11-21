@@ -33,9 +33,6 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by printart on 11/17/2016.
- */
 public class SymbolDetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     @BindView(R.id.symbol_detail_title_text_view)
@@ -149,7 +146,6 @@ public class SymbolDetailActivity extends AppCompatActivity implements LoaderMan
         }
         mPriceTextView.setText(String.format(Locale.getDefault(), "$%.2f", price));
         buildChart();
-        cursor.moveToFirst();
     }
 
     @Override

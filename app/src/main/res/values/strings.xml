@@ -34,5 +34,6 @@
     <string name="toast_no_connectivity">Will refresh when network available.</string>
     <string name="symbol_title_v">Symbol:</string>
     <string name="current_price_title_v">Current Price:</string>
+    <string name="stock_hawk_widget_title" translatable="false">Stock Hawk</string>
 
 </resources>
