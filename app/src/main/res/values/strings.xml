@@ -35,5 +35,6 @@
     <string name="symbol_title_v">Symbol:</string>
     <string name="current_price_title_v">Current Price:</string>
     <string name="stock_hawk_widget_title" translatable="false">Stock Hawk</string>
+    <string name="description_add_new_symbol">add new symbol</string>
 
 </resources>
